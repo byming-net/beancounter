@@ -1,0 +1,4 @@
+DIR_STMTS="/home/user/beancount/beans/stmts/"
+DIR_OUTPUT="/home/user/beancount/check/bmoCredit/"
+BMO_CREDIT_BEAN_ACCOUNT="Liabilities:CreditCard:BMOCashBack"
+ACCOUNT_CLOSED=False
