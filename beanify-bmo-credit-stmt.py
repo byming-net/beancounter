@@ -13,7 +13,8 @@ detailedMode = False
 dirStmts = os.getenv("DIR_STMTS")
 dirOutput = os.getenv("DIR_OUTPUT")
 accountClosed = os.getenv("BMO_CREDIT_CLOSED")
-beanAccount = os.getenv("BMO_CREDIT_BEAN_ACCOUNT")
+beanLiabilityAccount = os.getenv("BMO_CREDIT_BEAN_ACCOUNT")
+beanExpenseAccount = os.getenv("BMO_EXPENSE_PLACEHOLDER")
 
 # regex
 regexTransaction = helperFunction.matchWholeMonthDayAtStart + helperFunction.matchSomeChars + helperFunction.matchPrice
@@ -25,10 +26,10 @@ regexPrice = helperFunction.matchPrice
 # Start!
 today = datetime.today()
 print("🌞Today: " + str(today.strftime('%Y-%m-%d')))
-print("📁Account in process: " + beanAccount)
+print("📁Account in process: " + beanLiabilityAccount)
 
 # Check documents are up to date
-stmtFolder = helperFunction.getInputPathFromBeanDef(dirStmts, beanAccount)
+stmtFolder = helperFunction.getInputPathFromBeanDef(dirStmts, beanLiabilityAccount)
 stmtFiles = glob.glob(stmtFolder+'*')
 latestFile = sorted(stmtFiles, key=helperFunction.getStmtDateFromString, reverse=True)[0]
 latestDocDate = helperFunction.getStmtDateFromString(latestFile)
@@ -36,12 +37,12 @@ latestDocDate = helperFunction.getStmtDateFromString(latestFile)
 if not accountClosed:
     dayDifference = (today - datetime.strptime(latestDocDate, "%Y-%m-%d")).days
     if dayDifference > 28:
-        pause = input ("🙋Your latest file has a date with >28 days of difference from today. Stop and go collect files? (y/n)")
+        pause = input ("🙋 Your latest file has a date with >28 days of difference from today. Stop and go collect files? (y/n)")
         if (pause != "y"):
             exit(0)
 
 # Clear output folder
-print("🧽Clearing files in checks folder........................")
+print("🧽Clearing files in checks folder...")
 outputFiles = glob.glob(dirOutput+"*")
 for file in outputFiles:
     os.remove(file)
@@ -93,8 +94,9 @@ for file in os.listdir(os.fsencode(stmtFolder)):
                 else:
                     outputFile = open(outputFileName, "x") # create one
 
-                outputFile.write(postedDate + ' * "' + description + '"\t'+ beanAccount + " " + price + "\n")
-                if detailedMode: print("output: " +postedDate + ' * "' + description + '"\t'+ beanAccount + " " + price + "\n")
+                outputLine = postedDate + ' * "' + description + '"\t'+ beanLiabilityAccount + " " + price + "\t" + beanExpenseAccount  + "\n"
+                outputFile.write(outputLine)
+                if detailedMode: print(outputLine)
                 if detailedMode: print()
 
     print("👌Read: " + fileName)
