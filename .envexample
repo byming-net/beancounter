@@ -2,4 +2,5 @@ DIR_STMTS="/home/user/beancount/beans/stmts/"
 DIR_OUTPUT="/home/user/beancount/check/bmoCredit/"
 BMO_CREDIT_BEAN_ACCOUNT="Liabilities:CreditCard:BMOCashBack"
 BMO_EXPENSE_PLACEHOLDER="Expenses:TBD"
+BMO_ASSET_PLACEHOLDER="Assets:TBD"
 ACCOUNT_CLOSED=False

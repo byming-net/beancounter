@@ -15,6 +15,7 @@ dirOutput = os.getenv("DIR_OUTPUT")
 accountClosed = os.getenv("BMO_CREDIT_CLOSED")
 beanLiabilityAccount = os.getenv("BMO_CREDIT_BEAN_ACCOUNT")
 beanExpenseAccount = os.getenv("BMO_EXPENSE_PLACEHOLDER")
+beanAssetAccount = os.getenv("BMO_ASSET_PLACEHOLDER")
 
 # regex
 regexTransaction = helperFunction.matchWholeMonthDayAtStart + helperFunction.matchSomeChars + helperFunction.matchPrice
@@ -22,6 +23,7 @@ regexPeriod = helperFunction.matchWholeMonthDayAtStart + ".{0,2}\d{4}.*" + helpe
 regexPostedDate = helperFunction.hasSomethingBefore + helperFunction.matchWholeMonthDay
 regexDescription = helperFunction.hasSomethingBefore + helperFunction.matchWholeMonthDay + ".*" + helperFunction.matchPrice
 regexPrice = helperFunction.matchPrice
+regexPaymentTransaction = "PAYMENT RECEIVED"
 
 # Start!
 today = datetime.today()
@@ -94,7 +96,10 @@ for file in os.listdir(os.fsencode(stmtFolder)):
                 else:
                     outputFile = open(outputFileName, "x") # create one
 
-                outputLine = postedDate + ' * "' + description + '"\t'+ beanLiabilityAccount + " " + price + "\t" + beanExpenseAccount  + "\n"
+                if (re.search(regexPaymentTransaction, transaction)):
+                    outputLine = postedDate + ' * "' + description + '"\t'+ beanLiabilityAccount + " +" + price + "\t" + beanAssetAccount  + "\n"
+                else:
+                    outputLine = postedDate + ' * "' + description + '"\t'+ beanLiabilityAccount + " -" + price + "\t" + beanExpenseAccount  + "\n"
                 outputFile.write(outputLine)
                 if detailedMode: print(outputLine)
                 if detailedMode: print()
@@ -104,4 +109,3 @@ for file in os.listdir(os.fsencode(stmtFolder)):
 #close pdf and output file
 pdfFileObj.close()
 outputFile.close()
-

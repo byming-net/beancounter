@@ -41,7 +41,7 @@ def getDescriptionFromTransaction(transaction, regex):
 
 def getPriceFromTransaction(transaction, regex):
     match =  re.search(regex, transaction, re.IGNORECASE).group().strip()
-    return "+" + match + " CAD"
+    return match + " CAD"
     
 
     

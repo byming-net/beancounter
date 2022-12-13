@@ -5,9 +5,12 @@
 
 ## Read
 
-- Prompt reminder if the account is open and the latest statement is >28 days before today
-- Read transactions and write them in the format of `YYYY-MM-DD * "<description>"<tab><beancount liability account> +X,XXX.XX CAD<tab><bean expense account placeholder>` to `YYYY-MM.bean` file
+- Prompt reminder in terminal if the account is open and the latest statement is >28 days before today
+- Read transactions and write them to `YYYY-MM.bean` file in the format of
+  - `YYYY-MM-DD * "<description>"<tab><beancount liability account> -X,XXX.XX CAD<tab><bean expense account placeholder>` for credit
+  - `YYYY-MM-DD * "<description>"<tab><beancount liability account> +X,XXX.XX CAD<tab><bean asset account placeholder>` for credit payment
 - Option to turn on detailedMode for more detail (set `detailedMode` to `True` in the `.py` file)
+  - print the transaction, date, description, price it reads
 
 ## Cover
 
