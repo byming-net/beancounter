@@ -1,6 +1,15 @@
-DIR_STMTS="/home/user/beancount/beans/stmts/"
-DIR_OUTPUT="/home/user/beancount/check/bmoCredit/"
+# For RENAME scripts
+DIR_DOWNLOAD="/home/user/Downloads/" # Folder where download files go
+## Sub folders inside DIR_DOWNLOAD
+DIR_DOWNLOAD_BMO_CREDIT="bmoCredit/" 
+## The <name> in "YYYY-MM-DD.<name>.pdf" when renaming
+RENAME_BMO_CREDIT_TO="bmo-credit-cashback"
+# For READ scripts
+DIR_STMTS="/home/user/beancount/beans/stmts/" # Folder where you store your statements
+DIR_OUTPUT="/home/user/beancount/check/bmoCredit/" # Folder where you want to store your output files
+## beancount accounts
+### bmo credit
 BMO_CREDIT_BEAN_ACCOUNT="Liabilities:CreditCard:BMOCashBack"
 BMO_EXPENSE_PLACEHOLDER="Expenses:TBD"
 BMO_ASSET_PLACEHOLDER="Assets:TBD"
-ACCOUNT_CLOSED=False
+BMO_CREDIT_CLOSED=False # if your account is closed in beancount

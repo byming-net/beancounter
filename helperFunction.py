@@ -13,6 +13,9 @@ matchSomeChars = ".{10,}"
 matchPrice = "(\d{1,3},)?\d{1,3}.?\.\d{2}" # 1,111.11
 hasSomethingBefore = "(?<!^)"
 
+def isFileNamePDF(fileName):
+    return re.search(".*(\.pdf)$", fileName)
+
 def getInputPathFromBeanDef(dirStmts, beanDef):
     return dirStmts + beanDef.replace(":","/") + "/"
 
