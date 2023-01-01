@@ -25,17 +25,17 @@ def found_in_string(word, string):
 
 
 def clean_date_string(date):
-    return reg.replace('\\.*|,*', "", date).strip()
+    return reg.replace('\\.+|,+', "", date).strip()
 
 
 def clean_description_string(description):
     description = reg.replace(reg.whole_day_month, "", description)
-    description = reg.replace("-*", "", description)
+    description = reg.replace("-+", "", description)
     return description.strip()
 
 
 def clean_price_string(string):
-    return reg.replace('\,*|\\$*|\s*', "", string).strip()
+    return reg.replace('\,+|\\$+|\s+', "", string).strip()
 
 
 def convert_string_to_date_format(string):
@@ -91,10 +91,12 @@ def get_description(transaction):
 
 def get_posted_date(transaction, end_period):
     # get date based on format
-    two_month_day = reg.has_something_before + reg.whoele_month_day
-    two_day_month = reg.has_something_before + reg.whole_day_month
+    two_month_day = reg.whoele_month_day + \
+        reg.negative_lookahead(reg.any_chars + reg.whoele_month_day)
+    two_day_month = reg.whole_day_month + \
+        reg.negative_lookahead(reg.any_chars + reg.whole_day_month)
     month_day = reg.month_name + reg.two_chars_max + reg.day_digit
-    day_month = reg.day_digit + reg.month_name + reg.two_chars_max
+    day_month = reg.day_digit + reg.two_chars_max + reg.month_name
 
     posted_date = reg.grab(reg.find_first_match(
         transaction, two_month_day, two_day_month, month_day, day_month), transaction)
@@ -131,7 +133,12 @@ def get_price(transaction, **kwargs):
 def get_balance(transaction):
     if (not reg.match(reg.twice_pattern(reg.price + reg.any_chars), transaction)):
         return False
-    return clean_price_string(reg.grab(reg.price+reg.end_with, transaction))
+    else:
+        at_start = reg.start_with + reg.price
+        at_end = reg.price + reg.end_with
+        regex = reg.find_first_match(transaction, at_start, at_end)
+
+    return clean_price_string(reg.grab(regex, transaction))
 
 
 def look_up_flow(transaction, flow_dictionary):

@@ -13,9 +13,9 @@ def beanify(detail_mode):
     # December 26, 2022 to January 25, 2023
     regex_period = reg.month_name + reg.any_chars + reg.to_in_string + \
         reg.any_chars + reg.month_name + reg.any_chars
-    # 31 Dec 2022 SOMETHING 1234 10.01 10.01
-    regex_transaction = reg.start_with + \
-        reg.whole_day_month + reg.any_chars + reg.price
+    # 10.01 10.01 SOMETHING 1234 31 Dec 2022
+    regex_transaction = reg.start_with + reg.price + \
+        reg.any_chars + reg.whole_day_month
     # init
     bean = AssetBean(
         account_closed,

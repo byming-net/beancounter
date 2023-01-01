@@ -90,7 +90,8 @@ class AssetBean:
                     description = func.get_description(transaction)
 
                     # date
-                    if (not reg.match(reg.whole_day_month, transaction)):
+                    if (not reg.match(reg.whoele_month_day, transaction)
+                            and not reg.match(reg.whole_day_month, transaction)):
                         posted_date = posted_dates_collected[len(
                             posted_dates_collected)-1]
                     else:
@@ -122,7 +123,8 @@ class AssetBean:
                         last_record_has_balance = True
                         balance_collected.append(balance)
                     else:
-                        flow = func.look_up_flow(transaction, dic.cash_flow)
+                        flow = func.look_up_flow(
+                            transaction, dic.asset_cash_flow)
                         last_record_has_balance = False
 
                     # write

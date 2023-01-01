@@ -34,6 +34,10 @@ def twice_pattern(regex):
     return "(" + regex + "){2,}"
 
 
+def negative_lookahead(regex):
+    return "(?!" + regex + ")"
+
+
 def match(pattern, string):
     return re.search(pattern, string, re.IGNORECASE)
 
