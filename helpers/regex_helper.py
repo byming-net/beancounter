@@ -10,8 +10,9 @@ any_non_digits = "\D*"
 any_digits = "\d*"
 has_something_before = "(?<!^)"
 # date related
-month_name = "(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)"
-whoele_month_name = "(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\b"
+month_name = "(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|" + \
+    "JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)"
+whoele_month_name = month_name + "\\b"
 day_digit = "\d{1,2}"
 month_digit = "\d{2}"
 year_digit = "\d{4}"
