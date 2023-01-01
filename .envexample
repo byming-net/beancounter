@@ -1,15 +1,35 @@
-# For RENAME scripts
-DIR_DOWNLOAD="/home/user/Downloads/" # Folder where download files go
-## Sub folders inside DIR_DOWNLOAD
-DIR_DOWNLOAD_BMO_CREDIT="bmoCredit/" 
-## The <name> in "YYYY-MM-DD.<name>.pdf" when renaming
-RENAME_BMO_CREDIT_TO="bmo-credit-cashback"
-# For READ scripts
-DIR_STMTS="/home/user/beancount/beans/stmts/" # Folder where you store your statements
-DIR_OUTPUT="/home/user/beancount/check/bmoCredit/" # Folder where you want to store your output files
-## beancount accounts
-### bmo credit
-BMO_CREDIT_BEAN_ACCOUNT="Liabilities:CreditCard:BMOCashBack"
-BMO_EXPENSE_PLACEHOLDER="Expenses:TBD"
-BMO_ASSET_PLACEHOLDER="Assets:TBD"
+# folder where you store your statements
+DIR_STMTS="/home/user/beancount/beans/stmts/" 
+# folder where you want your output be
+DIR_OUTPUT="/home/user/beancount/check/" 
+# placeholder
+ASSETS_ACCOUNT_PLACEHOLDER="Assets:TBD"
+EXPENSES_ACCOUNT_PLACEHOLDER="Expenses:TBD"
+LIABILITIES_ACCOUNT_PLACEHOLDER="Liabilities:TBD"
+INCOME_ACCOUNT_PLACEHOLDER="INCOME:TBD"
+
+# beancount accounts
+## bmo credit
+BMO_CREDIT_BEAN_ACCOUNTS="Liabilities:CreditCard:BMOCashBack"
 BMO_CREDIT_CLOSED=False # if your account is closed in beancount
+## rbc credit
+RBC_CREDIT_BEAN_ACCOUNTS="Liabilities:CreditCard:RBCCashBack"
+RBC_CREDIT_CLOSED=False
+## brim credit
+BRIM_CREDIT_BEAN_ACCOUNTS="Liabilities:CreditCard:BRIMNoFX"
+BRIM_CREDIT_CLOSED=False
+## cibc credit
+CIBC_CREDIT_BEAN_ACCOUNTS="Liabilities:CreditCard:CIBCAeroplan"
+CIBC_CREDIT_CLOSED=False
+## td credit
+TD_CREDIT_BEAN_ACCOUNTS="Liabilities:CreditCard:TDCashBack"
+TD_CREDIT_CLOSED=False
+## eq hybrid
+EQ_HYBRID_BEAN_ACCOUNTS="Assets:LIQUID:EQ:Hybrid"
+EQ_HYBRID_CLOSED=False
+## rbc cheq sav
+RBC_CHEQ_SAV_BEAN_ACCOUNTS="Assets:LIQUID:RBC:Sav,Assets:LIQUID:RBC:Cheq"
+RBC_CHEQ_SAV_CLOSED=False
+## tangerine cheq sav
+TANGERINE_CHEQ_SAV_BEAN_ACCOUNTS="Assets:LIQUID:Tangerine:Cheq"
+TANGERINE_CHEQ_SAV_CLOSED=False
